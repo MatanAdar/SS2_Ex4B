@@ -41,11 +41,15 @@ namespace ariel{
                 return c_location;
             }
 
+            void setLocation(const Point& new_p){
+                this->c_location = new_p;
+            }
+
             int getHealth() const{
                 return c_health;
             }
 
-            void setHealth(int dmg){
+            void set_Health_Lower(int dmg){
                 c_health -= dmg;
             }
 

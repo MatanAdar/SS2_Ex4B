@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
@@ -27,7 +28,7 @@ namespace ariel{
 
             string print() const;
 
-            Point moveTowards(const Point& destanation, double distance);
+            Point static moveTowards(const Point& source ,const Point& destanation, double distance);
 
     };
 }      

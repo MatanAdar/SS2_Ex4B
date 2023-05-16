@@ -28,8 +28,15 @@ namespace ariel{
 
     void Character::hit(int hits){
 
+        if(hits < 0 ){
+            throw std::invalid_argument("cant give negative value");
+        }
+
         c_health -= hits;
     }
+
+
+    
 
 }
 

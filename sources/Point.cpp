@@ -46,25 +46,25 @@ namespace ariel{
         return "(" + std::to_string(this->getPointX()) + "," + std::to_string(this->getPointY()) + ")";
     }
 
-    Point Point::moveTowards(const Point& destanation, double distance){
+    Point Point::moveTowards(const Point& source ,const Point& destanation, double distance){
 
         if(distance < 0){
-            throw std::runtime_error("cant give negative distance");
+            throw std::invalid_argument("cant give negative distance");
         }
         
         if(distance == 0){
-            return *this;        
+            return source;        
         }
 
-        double distance_this_to_dest = this->distance(destanation);
+        double distance_this_to_dest = source.distance(destanation);
 
         if(distance_this_to_dest < distance){
             return destanation;
         }
         else{
             double ratio = distance / distance_this_to_dest;
-            double new_x = this->getPointX() + (destanation.getPointX() - this->getPointX()) * ratio;
-            double new_y = this->getPointY() + (destanation.getPointY() - this->getPointY()) * ratio;
+            double new_x = source.getPointX() + (destanation.getPointX() - source.getPointX()) * ratio;
+            double new_y = source.getPointY() + (destanation.getPointY() - source.getPointY()) * ratio;
 
             return Point(new_x,new_y);
 

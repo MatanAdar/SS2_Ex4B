@@ -28,8 +28,16 @@ namespace ariel{
 
             Team(Character* leader);
 
+            vector<Character*> getTeam(){
+                return team;
+            }
+
             Character* getLeader(){
                 return team_leader;
+            }
+
+            void setLeader(Character* other){
+                team_leader = other;
             }
 
             void add(Character* player);

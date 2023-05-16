@@ -16,14 +16,24 @@ namespace ariel{
 
     void Cowboy::shoot(Character* enemy){
 
-        if((this->getHealth() > 0) && (this->hasboolets())){
+        if(this != enemy){
+            if(enemy->isAlive() == false || this->isAlive() == false){
+                throw std::runtime_error("Cant attack dead player");
+            }
+            
+            if((this->getHealth() > 0) && (this->hasboolets())){
 
-            //lower health of enemy by 10
-            enemy->setHealth(10);
+                //lower health of enemy by 10
+                enemy->set_Health_Lower(10);
 
-            //lower amout of bullets by 1
-            this->amount_of_bullets--;
+                //lower amout of bullets by 1
+                this->amount_of_bullets--;
+            }
         }
+        else{
+            throw std::runtime_error("cant harm myself");
+        }
+
     }
 
     bool Cowboy::hasboolets() const{
@@ -33,8 +43,8 @@ namespace ariel{
 
     void Cowboy::reload(){
 
-        if(amount_of_bullets > 0){
-            throw std::runtime_error("cant reload when we still have bullets");
+        if(this->isAlive() == false){
+            throw std::runtime_error("dead player cant reload");
         }
 
         amount_of_bullets = 6;
