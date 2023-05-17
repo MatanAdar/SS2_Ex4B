@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <string>
 #include <stdexcept>
+#include <numeric>
+#include <limits>
 
 using namespace std;
 
@@ -28,7 +30,7 @@ namespace ariel{
 
             string print() const;
 
-            Point static moveTowards(const Point& source ,const Point& destanation, double distance);
+            Point static moveTowards(const Point &src, const Point &dest, double dist);
 
     };
 }      

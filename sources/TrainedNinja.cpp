@@ -7,8 +7,4 @@ namespace ariel{
 
     }
 
-    string TrainedNinja::print() const{
-
-        return "Hii TrainedNinja";
-    }
 }

@@ -12,9 +12,7 @@ namespace ariel{
         public:
 
             TrainedNinja(const string& name,const Point& location);
-
-            string print() const override;
-
+            
             //~TrainedNinja() = default;
 
     };

@@ -20,9 +20,10 @@ namespace ariel{
             void slash(Character* enemy);
 
             //need to check why i cant do here virtual
-            string print() const override= 0;
+            string print() const override;
 
-            //virtual ~Ninja() = default;
+            void attack(Character* enemy) override;
+
     
     };
 

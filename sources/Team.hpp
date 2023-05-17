@@ -24,6 +24,10 @@ namespace ariel{
 
             Character* team_leader;
 
+            void find_new_leader();
+
+            Character* findVictim(Team* other_team);
+
         public:
 
             Team(Character* leader);

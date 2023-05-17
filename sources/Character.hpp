@@ -4,6 +4,7 @@
 #include "Point.hpp"
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -29,7 +30,7 @@ namespace ariel{
 
             bool isAlive() const;
 
-            double distance(const Character* other_c) const;
+            double distance(Character* other_c) ;
 
             void hit(int hits);
 
@@ -41,16 +42,12 @@ namespace ariel{
                 return c_location;
             }
 
-            void setLocation(const Point& new_p){
+            void setLocation(const Point new_p){
                 this->c_location = new_p;
             }
 
             int getHealth() const{
                 return c_health;
-            }
-
-            void set_Health_Lower(int dmg){
-                c_health -= dmg;
             }
 
             bool getInTeam() const{
@@ -64,6 +61,8 @@ namespace ariel{
             }
             
             virtual string print() const = 0;
+
+            virtual void attack(Character* enemy) = 0;
 
             //virtual destructor
             virtual ~Character() = default ;

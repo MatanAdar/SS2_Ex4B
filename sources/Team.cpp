@@ -2,6 +2,10 @@
 
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
+#include <numeric>
+#include <limits> 
+
 
 
 
@@ -44,64 +48,93 @@ namespace ariel{
 
     void Team::attack(Team* other_team){
 
-        if(other_team  == NULL){
+        if(other_team  == nullptr){
             throw std::invalid_argument("There is no team to attack");
         }
-        else{
+        if(this->stillAlive() == 0 || other_team->stillAlive() == 0){
+            throw std::runtime_error("Game over");
+        }
+        
+        if(this->getLeader()->isAlive() == false){
+            find_new_leader();
+        }
 
-            double shortest_distance; 
+        //checking who is the most closes to the leader to be the victim
+        Character* victim = nullptr;
+        if(other_team->stillAlive() > 0){
+            victim = findVictim(other_team);
+        }
+        else
+            return;
 
-            if(this->getLeader()->isAlive() == false){
-                Point leader_loc = this->getLeader()->getLocation();
+        for(Character* attacker : team){
+            if(attacker != nullptr && attacker->isAlive()){
 
-                shortest_distance = this->getLeader()->distance(team[0]);
-
-                for(size_t i = 1; i<team.size(); i++){
-                    double check_dis = this->getLeader()->distance(team[i]);
-                    if(check_dis < shortest_distance && team[i]->isAlive()){
-                        this->setLeader(team[i]);
+                if(victim != nullptr && victim->isAlive()){
+                    attacker->attack(victim);
+                }
+                else{
+                    victim = findVictim(other_team);
+                    if (victim != nullptr && victim->isAlive())
+                    {
+                        attacker->attack(victim);
+                        //victim->print();
                     }
                 }
             }
-
-            Character* victim;
-            shortest_distance = other_team->getLeader()->distance(team[0]);
-            for(size_t i = 1;i<other_team->getTeam().size();i++){
-                double check_dis = other_team->getLeader()->distance(other_team->getTeam()[i]);
-                if(check_dis < shortest_distance && other_team->getTeam()[i]->isAlive()){
-                    victim = other_team->getTeam()[i];
-                }
-            }  
-            // for attacker in attackers:
-            //     attacker.attack(victim)
-
-            // attack():
-            //     if יש כדורים
-            //         תירה
-            //     else
-
-                
-
-
         }
-        
     }
+
+    void Team::find_new_leader(){
+
+        double shortest_distance = numeric_limits<double>::max();
+
+        for(Character* player : team){
+            double check_dis = this->getLeader()->distance(player);
+            if(check_dis < shortest_distance && player->isAlive()){
+                shortest_distance = check_dis;
+                this->setLeader(player);
+            }
+        }
+    }
+
+    Character* Team::findVictim(Team* other_team){
+        Character* victim;
+        double minDistance = numeric_limits<double>::max();
+
+        for (auto player : other_team->getTeam()){
+
+            if (player != nullptr && player->isAlive()){
+
+                double distance = other_team->getLeader()->distance(player);
+                if (distance <= minDistance)
+                {
+                    minDistance = distance;
+                    victim = player;
+                }
+            }
+        }
+
+        return victim;
+    }
+    
 
     int Team::stillAlive() const{
         
         int count = 0;
-        for(size_t i=0; i<team.size(); i++){
-            if(team[i]->isAlive() == true){
+        for(Character* player : team){
+            if(player != nullptr && player->isAlive()){
                 count++;
             }
-
         }
-
         return count;
     }
             
     void Team::print() const{
-
+        cout << "players details:" << endl;
+        for(Character* player : team){
+            cout << player->print() << endl;
+        }
     }
 
     bool Team::checking_player_in_team_already(Character* player){

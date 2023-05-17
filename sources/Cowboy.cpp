@@ -18,13 +18,13 @@ namespace ariel{
 
         if(this != enemy){
             if(enemy->isAlive() == false || this->isAlive() == false){
-                throw std::runtime_error("Cant attack dead player");
+                throw std::runtime_error("Cant shoot dead player");
             }
             
-            if((this->getHealth() > 0) && (this->hasboolets())){
+            if((this->isAlive()) && (this->hasboolets())){
 
                 //lower health of enemy by 10
-                enemy->set_Health_Lower(10);
+                enemy->hit(10);
 
                 //lower amout of bullets by 1
                 this->amount_of_bullets--;
@@ -46,17 +46,33 @@ namespace ariel{
         if(this->isAlive() == false){
             throw std::runtime_error("dead player cant reload");
         }
-
-        amount_of_bullets = 6;
+        else{
+            amount_of_bullets = 6;
+        }
     }
 
     string Cowboy::print() const{
 
-        if(this->getHealth() <= 0){
-            return "C (" + this->getName() + ") " + this->getLocation().print();
+        if(this->isAlive() == false){
+            return " C (" + this->getName() + ") " + this->getLocation().print();
         }
 
-        return "C " + this->getName() + " " + std::to_string(this->getHealth()) + " " + this->getLocation().print();
+        return " C " + this->getName() + " " + std::to_string(this->getHealth()) + " " + this->getLocation().print();
+    }
+
+
+    void Cowboy::attack(Character* enemy) {
+
+        if(enemy == nullptr || !(this->isAlive()) || !(enemy->isAlive())){
+            throw std::invalid_argument("cant attack null");
+        }
+
+        if(!(this->hasboolets())){
+            reload();
+        }
+        else{
+            this->shoot(enemy);
+        }
     }
 
 

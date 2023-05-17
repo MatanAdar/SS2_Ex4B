@@ -31,8 +31,8 @@ namespace ariel{
 
     double Point::distance(const Point& other_point) const{
 
-        double dis_x = this->getPointX() - other_point.getPointX();
-        double dis_y = this->getPointY() - other_point.getPointY();
+        double dis_x = other_point.getPointX() - this->getPointX();
+        double dis_y = other_point.getPointY() - this->getPointY();
 
         double pow_x = dis_x*dis_x;
         double pow_y = dis_y*dis_y;
@@ -51,14 +51,14 @@ namespace ariel{
         if(distance < 0){
             throw std::invalid_argument("cant give negative distance");
         }
-        
-        if(distance == 0){
-            return source;        
+
+        if(distance == 0.0){
+            return source;
         }
 
         double distance_this_to_dest = source.distance(destanation);
 
-        if(distance_this_to_dest < distance){
+        if(distance_this_to_dest <= distance){
             return destanation;
         }
         else{

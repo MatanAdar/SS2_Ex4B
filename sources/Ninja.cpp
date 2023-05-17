@@ -9,10 +9,9 @@ namespace ariel{
         
     }
 
-    void Ninja::move(Character* enemy){
-        
-        Point new_position = Point::moveTowards(this->getLocation(), enemy->getLocation(), this->speed);
-
+    void Ninja::move(Character* enemy) {
+        Point current_location = this->getLocation();
+        Point new_position = current_location.moveTowards(current_location, enemy->getLocation(), this->speed);
         this->setLocation(new_position);
     }
 
@@ -22,9 +21,9 @@ namespace ariel{
             if((enemy->isAlive() == false) || (this->isAlive() == false)){
                 throw std::runtime_error("Cant attack dead player");
             }
-            else if((this->isAlive() == true) && (this->distance(enemy) < 1)){
+            else if((this->isAlive() == true) && (this->distance(enemy) <= 1)){
                 // lower hp of enemy by 40 hit points
-                enemy->set_Health_Lower(40);
+                enemy->hit(40);
             }
         }
         else{
@@ -33,8 +32,28 @@ namespace ariel{
 
     }
 
-    // string Ninja::print() const{
-    //     return "hii";
-    // }
+    string Ninja::print() const{
+        
+        if(this->isAlive() == false){
+            return " N (" + this->getName() + ") " + this->getLocation().print();
+        }
+
+        return " N " + this->getName() + " " + std::to_string(this->getHealth()) + " " + this->getLocation().print();
+    }
+
+
+    void Ninja::attack(Character* enemy) {
+
+        if(enemy == nullptr || !(this->isAlive()) || !(enemy->isAlive()) ){
+            throw std::invalid_argument("cant attack null");
+        }
+
+        if(this->distance(enemy) > 1 ){
+            move(enemy);
+        }
+        else{
+            this->slash(enemy);
+        }
+    }
 
 }

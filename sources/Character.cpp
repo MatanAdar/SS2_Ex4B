@@ -20,9 +20,9 @@ namespace ariel{
         return c_health > 0;
     }
 
-    double Character::distance(const Character* other_c) const{
-
-        return c_location.distance(other_c->getLocation());
+    double Character::distance( Character* other_c) {
+        double ans = this->c_location.distance(other_c->c_location);
+        return ans;
 
     }
 

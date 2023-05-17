@@ -7,8 +7,4 @@ namespace ariel{
 
     }
 
-    string YoungNinja::print() const{
-
-        return "hii YoungNinja";
-    }
 }

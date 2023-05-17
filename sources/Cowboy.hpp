@@ -18,6 +18,10 @@ namespace ariel{
 
             Cowboy(const string& name, const Point& location);
 
+            int getBullets() const{
+                return amount_of_bullets;
+            }
+
             void shoot(Character* enemy);
 
             bool hasboolets() const;
@@ -25,6 +29,8 @@ namespace ariel{
             void reload();
 
             string print() const override;
+
+            void attack(Character* enemy) override;
 
             //~Cowboy() = default;
     };

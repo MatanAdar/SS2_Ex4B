@@ -14,8 +14,6 @@ namespace ariel{
 
             YoungNinja(const string& name, const Point& location);
 
-            string print() const override;
-
             //~YoungNinja() = default;
 
     };
