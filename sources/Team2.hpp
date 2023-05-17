@@ -8,11 +8,11 @@ namespace ariel{
 
         private:
 
-
-
         public:
 
-        Team2(Character* leader);
+            Team2(Character* leader);
+
+            void add(Character *player) override;
 
 
 

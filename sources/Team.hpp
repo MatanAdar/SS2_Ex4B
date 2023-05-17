@@ -32,7 +32,7 @@ namespace ariel{
 
             Team(Character* leader);
 
-            vector<Character*> getTeam(){
+            vector<Character*>& getTeam(){
                 return team;
             }
 
@@ -44,11 +44,11 @@ namespace ariel{
                 team_leader = other;
             }
 
-            void add(Character* player);
+            virtual void add(Character* player);
 
             void attack(Team* other_team);
 
-            int stillAlive() const;
+            int stillAlive();
             
             void print() const;
 

@@ -29,19 +29,21 @@ namespace ariel{
 
     void Team::add(Character* player){
 
-        //checking if player is already in any team
-        bool result = checking_player_in_team_already(player);
+        if (player != nullptr && player->isAlive() && !player->getInTeam() && team.size() < 10)
+        {
+            if (dynamic_cast<Cowboy *>(player) != nullptr){
+                team.insert(team.begin(), player);
+            }
+            else{
+                team.push_back(player);
+            }
 
-        if(result == true){
-            throw std::runtime_error(player->getName() + "is already in a team");
-        }
-
-        if(team.size() < 10){
-            team.push_back(player);
             player->setInTeam(true);
         }
-        else{
-            throw std::runtime_error("Team is Max capacity!");
+
+        else
+        {
+            throw runtime_error("Can't add this player");
         }
     }
 
@@ -119,7 +121,7 @@ namespace ariel{
     }
     
 
-    int Team::stillAlive() const{
+    int Team::stillAlive(){
         
         int count = 0;
         for(Character* player : team){

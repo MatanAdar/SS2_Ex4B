@@ -21,7 +21,7 @@ namespace ariel{
     }
 
     double Character::distance( Character* other_c) {
-        double ans = this->c_location.distance(other_c->c_location);
+        double ans = this->getLocation().distance(other_c->getLocation());
         return ans;
 
     }
