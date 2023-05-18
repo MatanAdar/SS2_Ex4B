@@ -81,15 +81,19 @@ namespace ariel{
 
         double shortest_distance = numeric_limits<double>::max();
 
+        Character* newLeader = nullptr;
+
         for(Character* player : team){
             if(player != nullptr && player->isAlive()){
                 double check_dis = this->getLeader()->distance(player);
                 if(check_dis < shortest_distance ){
                     shortest_distance = check_dis;
-                    this->setLeader(player);
+                    newLeader = player;
                 }
             }
         }
+
+        this->setLeader(newLeader);
     }
 
     Character* Team::findVictim(Team* other_team){
