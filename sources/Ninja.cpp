@@ -9,7 +9,8 @@ namespace ariel{
         
     }
 
-    void Ninja::move(Character* enemy) {
+    void Ninja::move(Character* enemy){
+        
         Point current_location = this->getLocation();
         Point new_position = current_location.moveTowards(current_location, enemy->getLocation(), this->speed);
         this->setLocation(new_position);
@@ -35,10 +36,10 @@ namespace ariel{
     string Ninja::print() const{
         
         if(this->isAlive() == false){
-            return " N (" + this->getName() + ") " + this->getLocation().print();
+            return " [N] ,Name: (" + this->getName() + ")" + " ,Location: " +this->getLocation().print();
         }
 
-        return " N " + this->getName() + " " + std::to_string(this->getHealth()) + " " + this->getLocation().print();
+        return " [N] ,Name: " + this->getName() + " ,HP: " + std::to_string(this->getHealth()) + " ,Location: " + this->getLocation().print();
     }
 
 

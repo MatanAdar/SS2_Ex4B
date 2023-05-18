@@ -1,8 +1,6 @@
 #ifndef TEAM_HPP
 #define TEAM_HPP
 
-
-
 #include "Point.hpp"
 #include "Cowboy.hpp"
 #include "OldNinja.hpp"
@@ -10,8 +8,14 @@
 #include "TrainedNinja.hpp"
 
 #include <vector>
+#include <cmath>
+#include <stdexcept>
+#include <iostream>
+#include <numeric>
+#include <limits>
+#include <ostream> 
 
-using namespace ariel;
+using namespace std;
 
 
 namespace ariel{

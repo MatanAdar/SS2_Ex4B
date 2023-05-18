@@ -55,9 +55,9 @@ namespace ariel{
                 return checking_in_team;
             }
 
-            void setInTeam(bool temp){
+            void setInTeam(bool change){
 
-                checking_in_team = temp;
+                checking_in_team = change;
             }
             
             virtual string print() const = 0;

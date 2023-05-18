@@ -54,10 +54,10 @@ namespace ariel{
     string Cowboy::print() const{
 
         if(this->isAlive() == false){
-            return " C (" + this->getName() + ") " + this->getLocation().print();
+            return " [C] ,Name: (" + this->getName() + ") " + "Location: " + this->getLocation().print();
         }
 
-        return " C " + this->getName() + " " + std::to_string(this->getHealth()) + " " + this->getLocation().print();
+        return " [C] ,Name: " + this->getName() + " ,HP: " + std::to_string(this->getHealth()) + " ,Location: " + this->getLocation().print();
     }
 
 

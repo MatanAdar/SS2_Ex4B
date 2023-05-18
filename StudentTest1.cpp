@@ -506,7 +506,7 @@ TEST_SUITE("Battle simulations") {
         auto team2_c3 = create_cowboy(3, 0);//
         auto team_c3 = create_cowboy(5, 0);//
         auto team2_c4 = create_cowboy(-5, 0);
-
+    
         Team team1{team_c1};
         team1.add(team_c2);
         team1.add(team_c3);
@@ -517,16 +517,50 @@ TEST_SUITE("Battle simulations") {
 
         cout << team2.stillAlive() << endl;
 
+        cout << "team1" << endl;
+
+        team1.print();
+        cout << "leader team1" << endl;
+        cout << team1.getLeader()->print() << endl;
+
+        cout << "team2" << endl;
+
+        team2.print();
+        cout << "leader team2" << endl;
+        cout << team2.getLeader()->print() << endl;
+
         multi_attack(4, team1, team2);
 
         // The captain of team2 is the closest enemy to the captain of team1, and therefore should be dead.
         CHECK((!team2_c2->isAlive() && team2_c1->isAlive() && team2_c3->isAlive() && team2_c4->isAlive()));
 
+
+        cout << "team1" << endl;
+
+        team1.print();
+        cout << "leader team1" << endl;
+        cout << team1.getLeader()->print() << endl;
+
+        cout << "team2" << endl;
+
+        team2.print();
+        cout << "leader team2" << endl;
+        cout << team2.getLeader()->print() << endl;
         // At this point, the captain should be team2_c3; hence, the next enemy to be attacked by team2 should team_c3.
         multi_attack(6, team2, team1);
         CHECK((!team_c3->isAlive() && team_c1->isAlive() && team_c2->isAlive()));
 
+        cout << "team1" << endl;
 
+        team1.print();
+        cout << "leader team1" << endl;
+        cout << team1.getLeader()->print() << endl;
+
+        cout << "team2" << endl;
+
+        team2.print();
+        cout << "leader team2" << endl;
+        cout << team2.getLeader()->print() << endl;
         // Killing the new captain
         while (team2_c3->isAlive()) {
             team_c1->reload();
@@ -535,6 +569,17 @@ TEST_SUITE("Battle simulations") {
 
         CHECK((!team2_c2->isAlive() && team2_c1->isAlive() && !team2_c3->isAlive() && team2_c4->isAlive()));
 
+        cout << "team1" << endl;
+
+        team1.print();
+        cout << "leader team1" << endl;
+        cout << team1.getLeader()->print() << endl;
+
+        cout << "team2" << endl;
+
+        team2.print();
+        cout << "leader team2" << endl;
+        cout << team2.getLeader()->print() << endl;
         //Next captain should be team2_c1, hence, the next enemy to be attacked by team2 should team_cc.
         multi_attack(7, team2, team1);
         CHECK((!team_c3->isAlive() && team_c1->isAlive() && !team_c2->isAlive()));

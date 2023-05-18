@@ -1,13 +1,5 @@
 #include "Team.hpp"
 
-#include <cmath>
-#include <stdexcept>
-#include <iostream>
-#include <numeric>
-#include <limits> 
-
-
-
 
 
 namespace ariel{
@@ -31,16 +23,15 @@ namespace ariel{
 
         if (player != nullptr && player->isAlive() && !player->getInTeam() && team.size() < 10)
         {
-            if (dynamic_cast<Cowboy *>(player) != nullptr){
+            if (Cowboy *cowboy = dynamic_cast<Cowboy*>(player)){
                 team.insert(team.begin(), player);
+                player->setInTeam(true);
             }
             else{
                 team.push_back(player);
+                player->setInTeam(true);
             }
-
-            player->setInTeam(true);
         }
-
         else
         {
             throw runtime_error("Can't add this player");
@@ -50,14 +41,15 @@ namespace ariel{
 
     void Team::attack(Team* other_team){
 
-        if(other_team  == nullptr){
-            throw std::invalid_argument("There is no team to attack");
+        if(other_team  == nullptr|| team_leader == nullptr){
+            throw std::invalid_argument("There is no team to attack/ no leader");
         }
+
         if(this->stillAlive() == 0 || other_team->stillAlive() == 0){
             throw std::runtime_error("Game over");
         }
         
-        if(this->getLeader()->isAlive() == false){
+        if(this->getLeader() != nullptr && this->getLeader()->isAlive() == false){
             find_new_leader();
         }
 
@@ -66,10 +58,8 @@ namespace ariel{
         if(other_team->stillAlive() > 0){
             victim = findVictim(other_team);
         }
-        else
-            return;
 
-        for(Character* attacker : team){
+        for(auto attacker : team){
             if(attacker != nullptr && attacker->isAlive()){
 
                 if(victim != nullptr && victim->isAlive()){
@@ -80,11 +70,11 @@ namespace ariel{
                     if (victim != nullptr && victim->isAlive())
                     {
                         attacker->attack(victim);
-                        //victim->print();
                     }
                 }
             }
         }
+
     }
 
     void Team::find_new_leader(){
@@ -92,31 +82,35 @@ namespace ariel{
         double shortest_distance = numeric_limits<double>::max();
 
         for(Character* player : team){
-            double check_dis = this->getLeader()->distance(player);
-            if(check_dis < shortest_distance && player->isAlive()){
-                shortest_distance = check_dis;
-                this->setLeader(player);
+            if(player != nullptr && player->isAlive()){
+                double check_dis = this->getLeader()->distance(player);
+                if(check_dis < shortest_distance ){
+                    shortest_distance = check_dis;
+                    this->setLeader(player);
+                }
             }
         }
     }
 
     Character* Team::findVictim(Team* other_team){
+
         Character* victim;
-        double minDistance = numeric_limits<double>::max();
+        
+        double minimumDistance = numeric_limits<double>::max();
 
         for (auto player : other_team->getTeam()){
 
             if (player != nullptr && player->isAlive()){
 
-                double distance = other_team->getLeader()->distance(player);
-                if (distance <= minDistance)
+                double distance = this->getLeader()->distance(player);
+                if (distance <= minimumDistance)
                 {
-                    minDistance = distance;
+                    minimumDistance = distance;
                     victim = player;
                 }
             }
         }
-
+        //cout << "Victim is: " << victim->getName() << endl;
         return victim;
     }
     
@@ -133,7 +127,7 @@ namespace ariel{
     }
             
     void Team::print() const{
-        cout << "players details:" << endl;
+        
         for(Character* player : team){
             cout << player->print() << endl;
         }
