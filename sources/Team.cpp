@@ -6,6 +6,10 @@ namespace ariel{
 
     Team::Team(Character* leader) : team_leader(leader) {
 
+        if(leader == nullptr){
+            throw std::runtime_error("cant be null");
+        }
+
         //checking if player is already in any team
         bool result = checking_player_in_team_already(leader);
 
@@ -21,7 +25,11 @@ namespace ariel{
 
     void Team::add(Character* player){
 
-        if (player != nullptr && player->isAlive() && !player->getInTeam() && team.size() < 10)
+        if(player == nullptr){
+            throw std::runtime_error("cant be null");
+        }
+
+        if (player->isAlive() && !player->getInTeam() && team.size() < 10)
         {
             if (Cowboy *cowboy = dynamic_cast<Cowboy*>(player)){
                 team.insert(team.begin(), player);
@@ -49,7 +57,7 @@ namespace ariel{
             throw std::runtime_error("Game over");
         }
         
-        if(this->getLeader() != nullptr && this->getLeader()->isAlive() == false){
+        if(this->getLeader()->isAlive() == false){
             find_new_leader();
         }
 
@@ -58,16 +66,19 @@ namespace ariel{
         if(other_team->stillAlive() > 0){
             victim = findVictim(other_team);
         }
+        else{
+            return;
+        }
 
         for(auto attacker : team){
-            if(attacker != nullptr && attacker->isAlive()){
+            if(attacker->isAlive()){
 
-                if(victim != nullptr && victim->isAlive()){
+                if(victim->isAlive()){
                     attacker->attack(victim);
                 }
                 else{
                     victim = findVictim(other_team);
-                    if (victim != nullptr && victim->isAlive())
+                    if (victim->isAlive())
                     {
                         attacker->attack(victim);
                     }
@@ -84,7 +95,7 @@ namespace ariel{
         Character* newLeader = nullptr;
 
         for(Character* player : team){
-            if(player != nullptr && player->isAlive()){
+            if(player->isAlive()){
                 double check_dis = this->getLeader()->distance(player);
                 if(check_dis < shortest_distance ){
                     shortest_distance = check_dis;
