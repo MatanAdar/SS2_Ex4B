@@ -7,7 +7,7 @@ namespace ariel{
     Team::Team(Character* leader) : team_leader(leader) {
 
         if(leader == nullptr){
-            throw std::runtime_error("cant be null");
+            throw std::runtime_error("leader cant be null");
         }
 
         //checking if player is already in any team
@@ -66,9 +66,6 @@ namespace ariel{
         if(other_team->stillAlive() > 0){
             victim = findVictim(other_team);
         }
-        else{
-            return;
-        }
 
         for(auto attacker : team){
             if(attacker->isAlive()){
@@ -85,7 +82,6 @@ namespace ariel{
                 }
             }
         }
-
     }
 
     void Team::find_new_leader(){
@@ -115,10 +111,11 @@ namespace ariel{
 
         for (auto player : other_team->getTeam()){
 
-            if (player != nullptr && player->isAlive()){
+            if (player->isAlive()){
 
                 double distance = this->getLeader()->distance(player);
-                if (distance <= minimumDistance)
+
+                if (distance < minimumDistance)
                 {
                     minimumDistance = distance;
                     victim = player;
@@ -134,7 +131,7 @@ namespace ariel{
         
         int count = 0;
         for(Character* player : team){
-            if(player != nullptr && player->isAlive()){
+            if(player->isAlive()){
                 count++;
             }
         }

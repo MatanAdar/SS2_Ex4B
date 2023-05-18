@@ -10,6 +10,10 @@ namespace ariel{
     }
 
     void Ninja::move(Character* enemy){
+
+        if(enemy == nullptr){
+            throw std::runtime_error("player cant be null");
+        }
         
         Point current_location = this->getLocation();
         Point new_position = current_location.moveTowards(current_location, enemy->getLocation(), this->speed);
@@ -17,6 +21,10 @@ namespace ariel{
     }
 
     void Ninja::slash(Character* enemy){
+
+        if(enemy == nullptr){
+            throw std::runtime_error("player cant be null");
+        }
 
         if(this != enemy){
             if((enemy->isAlive() == false) || (this->isAlive() == false)){

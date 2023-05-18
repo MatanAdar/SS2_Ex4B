@@ -16,6 +16,10 @@ namespace ariel{
 
     void Cowboy::shoot(Character* enemy){
 
+        if(enemy == nullptr){
+            throw std::runtime_error("player cant be null");
+        }
+
         if(this != enemy){
             if(enemy->isAlive() == false || this->isAlive() == false){
                 throw std::runtime_error("Cant shoot dead player");

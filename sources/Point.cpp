@@ -52,9 +52,9 @@ namespace ariel{
             throw std::invalid_argument("cant give negative distance");
         }
 
-        // if(distance == 0.0){
-        //     return source;
-        // }
+        if(distance == 0.0){
+            return source;
+        }
 
         double distance_this_to_dest = source.distance(destanation);
 
