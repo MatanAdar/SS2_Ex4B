@@ -31,14 +31,8 @@ namespace ariel{
 
         if (player->isAlive() && !player->getInTeam() && team.size() < 10)
         {
-            if (Cowboy *cowboy = dynamic_cast<Cowboy*>(player)){
-                team.insert(team.begin(), player);
-                player->setInTeam(true);
-            }
-            else{
-                team.push_back(player);
-                player->setInTeam(true);
-            }
+            team.push_back(player);
+            player->setInTeam(true);
         }
         else
         {
@@ -62,24 +56,52 @@ namespace ariel{
         }
 
         //checking who is the most closes to the leader to be the victim
-        Character* victim = nullptr;
-        if(other_team->stillAlive() > 0){
-            victim = findVictim(other_team);
-        }
+        Character* victim = findVictim(other_team);
 
+        //first on go on cowboys
         for(auto attacker : team){
-            if(attacker->isAlive()){
+            if (!victim->isAlive())
+            {
+                if (other_team->stillAlive() == 0)
+                    return;
+                victim = findVictim(other_team);
+            }
 
-                if(victim->isAlive()){
-                    attacker->attack(victim);
+            if (attacker->isAlive())
+            {
+                Cowboy *cowboy = dynamic_cast<Cowboy *>(attacker);
+
+                if (cowboy != nullptr)
+                {
+                    cowboy->attack(victim);
                 }
-                else{
-                    victim = findVictim(other_team);
-                    if (victim->isAlive())
-                    {
-                        attacker->attack(victim);
-                    }
+                // else{
+                //     attacker->attack(victim);
+                // }
+            }
+        }
+    // }
+
+        //after this move on ninja's
+        for(auto attacker : team){
+            if (!victim->isAlive())
+            {
+                if (other_team->stillAlive() == 0){
+                    return;
                 }
+
+                victim = findVictim(other_team);
+            }
+
+            if (attacker->isAlive())
+            {
+                Ninja *ninja = dynamic_cast<Ninja *>(attacker);
+
+                if(ninja != nullptr){
+
+                    ninja->attack(victim);
+                }
+
             }
         }
     }

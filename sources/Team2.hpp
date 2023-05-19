@@ -12,8 +12,7 @@ namespace ariel{
 
             Team2(Character* leader);
 
-            void add(Character *player) override;
-
+            void attack(Team* other_team) override;
 
 
     };

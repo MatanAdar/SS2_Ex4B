@@ -506,16 +506,14 @@ TEST_SUITE("Battle simulations") {
         auto team2_c3 = create_cowboy(3, 0);//
         auto team_c3 = create_cowboy(5, 0);//
         auto team2_c4 = create_cowboy(-5, 0);
-    
+
         Team team1{team_c1};
         team1.add(team_c2);
         team1.add(team_c3);
-        Team2 team2{team2_c2};
+        Team team2{team2_c2};
         team2.add(team2_c1);
         team2.add(team2_c3);
         team2.add(team2_c4);
-
-        cout << team2.stillAlive() << endl;
 
         multi_attack(4, team1, team2);
 
@@ -525,6 +523,7 @@ TEST_SUITE("Battle simulations") {
         // At this point, the captain should be team2_c3; hence, the next enemy to be attacked by team2 should team_c3.
         multi_attack(6, team2, team1);
         CHECK((!team_c3->isAlive() && team_c1->isAlive() && team_c2->isAlive()));
+
 
         // Killing the new captain
         while (team2_c3->isAlive()) {

@@ -6,23 +6,38 @@ namespace ariel{
 
     }
 
+    //need to change this to work in team2
+    void Team2::attack(Team* other_team){
 
-    void Team2::add(Character *player){
-
-        if(player == nullptr){
-            throw std::runtime_error("cant be null");
+        if(other_team  == nullptr|| getLeader() == nullptr){
+            throw std::invalid_argument("There is no team to attack/ no leader");
         }
 
-        if (player->isAlive() && !player->getInTeam() && getTeam().size() < 10)
-        {
-            getTeam().push_back(player);
-            player->setInTeam(true);
+        if(this->stillAlive() == 0 || other_team->stillAlive() == 0){
+            throw std::runtime_error("Game over");
         }
-        else
-        {
-            throw runtime_error("Can't add this player");
+        
+        if(this->getLeader()->isAlive() == false){
+            find_new_leader();
+        }
+
+        //checking who is the most closes to the leader to be the victim
+        Character* victim = findVictim(other_team);
+        for(auto attacker : getTeam()){
+            if (!victim->isAlive())
+            {
+                if (other_team->stillAlive() == 0)
+                    return;
+                victim = findVictim(other_team);
+            }
+
+            if (attacker->isAlive())
+            {
+                attacker->attack(victim);
+            }
         }
     }
+
        
 
 }

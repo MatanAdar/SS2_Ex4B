@@ -28,10 +28,6 @@ namespace ariel{
 
             Character* team_leader;
 
-            void find_new_leader();
-
-            Character* findVictim(Team* other_team);
-
         public:
 
             Team(Character* leader);
@@ -48,9 +44,13 @@ namespace ariel{
                 team_leader = other;
             }
 
-            virtual void add(Character* player);
+            void add(Character* player);
 
-            void attack(Team* other_team);
+            virtual void attack(Team* other_team);
+
+            void find_new_leader();
+
+            Character* findVictim(Team* other_team);
 
             int stillAlive();
             
@@ -59,7 +59,7 @@ namespace ariel{
             bool checking_player_in_team_already(Character* player);
 
             //destructor
-            ~Team();
+            virtual ~Team();
 
             Team(const Team& other) : team_leader(other.team_leader){
             // Copy the state of the `other` object
