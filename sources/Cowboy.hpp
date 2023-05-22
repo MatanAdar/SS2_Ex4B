@@ -14,18 +14,11 @@ namespace ariel{
 
         public:
 
-            // Cowboy(const string& name, const Point& location, int health);
-
             Cowboy(const string& name, const Point& location);
 
             int getBullets() const{
                 return amount_of_bullets;
             }
-
-            // int getPower() const override{
-            //     int power = 10;
-            //     return power;
-            // }
 
             void shoot(Character* enemy);
 

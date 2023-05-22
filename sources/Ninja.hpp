@@ -15,11 +15,6 @@ namespace ariel{
 
             Ninja(const string& name, const Point& location, int health , int speed);
 
-            // int getPower() const override{
-            //     int power = 40;
-            //     return power;
-            // }
-
             void move(Character* enemy);
 
             void slash(Character* enemy);

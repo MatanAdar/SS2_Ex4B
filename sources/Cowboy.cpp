@@ -5,10 +5,6 @@
 
 namespace ariel{
 
-    // Cowboy::Cowboy(const string& name, const Point& location, int health) : Character(name,location,110), amount_of_bullets(6){
-
-    // }
-
     Cowboy::Cowboy(const string& name, const Point& location) : Character(name,location,110) , amount_of_bullets(6){
 
 

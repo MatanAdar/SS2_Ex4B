@@ -59,8 +59,6 @@ namespace ariel{
 
                 checking_in_team = change;
             }
-
-            // virtual int getPower() const = 0;
             
             virtual string print() const = 0;
 

@@ -62,17 +62,13 @@ namespace ariel{
             virtual ~Team();
 
             Team(const Team& other) : team_leader(other.team_leader){
-            // Copy the state of the `other` object
-            // to the new `Team` object
-            // ...
+            
             }
 
             // Copy assignment operator
             Team& operator=(const Team& other) {
                 if (this != &other) {
-                    // Copy the state of the `other` object
-                    // to the current object
-                    // ...
+
                 }
                 return *this;
             }

@@ -122,6 +122,7 @@ namespace ariel{
         this->setLeader(newLeader);
     }
 
+
     Character* Team::findVictim(Team* other_team){
 
         Character* victim;
@@ -156,13 +157,15 @@ namespace ariel{
         }
         return count;
     }
-            
+
+
     void Team::print() const{
         
         for(Character* player : team){
             cout << player->print() << endl;
         }
     }
+
 
     bool Team::checking_player_in_team_already(Character* player){
 
@@ -171,6 +174,7 @@ namespace ariel{
         }
         return false;
     }
+
 
     Team::~Team(){
         for (auto player : team) {
