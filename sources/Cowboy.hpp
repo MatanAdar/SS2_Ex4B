@@ -22,6 +22,11 @@ namespace ariel{
                 return amount_of_bullets;
             }
 
+            // int getPower() const override{
+            //     int power = 10;
+            //     return power;
+            // }
+
             void shoot(Character* enemy);
 
             bool hasboolets() const;
@@ -30,9 +35,8 @@ namespace ariel{
 
             string print() const override;
 
-            void attack(Character* enemy) override;
+            void player_attack(Character* enemy) override;
 
-            //~Cowboy() = default;
     };
 }
 

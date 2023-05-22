@@ -30,7 +30,7 @@ namespace ariel{
 
             bool isAlive() const;
 
-            double distance(Character* other_c) ;
+            double distance(Character* other_c);
 
             void hit(int hits);
 
@@ -59,10 +59,12 @@ namespace ariel{
 
                 checking_in_team = change;
             }
+
+            // virtual int getPower() const = 0;
             
             virtual string print() const = 0;
 
-            virtual void attack(Character* enemy) = 0;
+            virtual void player_attack(Character* enemy) = 0;
 
             //virtual destructor
             virtual ~Character() = default ;

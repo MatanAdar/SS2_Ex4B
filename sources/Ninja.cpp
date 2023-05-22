@@ -51,7 +51,7 @@ namespace ariel{
     }
 
 
-    void Ninja::attack(Character* enemy) {
+    void Ninja::player_attack(Character* enemy) {
 
         if(enemy == nullptr || !(this->isAlive()) || !(enemy->isAlive()) ){
             throw std::invalid_argument("cant attack null");

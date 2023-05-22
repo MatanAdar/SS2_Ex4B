@@ -33,7 +33,7 @@ namespace ariel{
 
             if (attacker->isAlive())
             {
-                attacker->attack(victim);
+                attacker->player_attack(victim);
             }
         }
     }

@@ -73,14 +73,10 @@ namespace ariel{
 
                 if (cowboy != nullptr)
                 {
-                    cowboy->attack(victim);
+                    cowboy->player_attack(victim);
                 }
-                // else{
-                //     attacker->attack(victim);
-                // }
             }
         }
-    // }
 
         //after this move on ninja's
         for(auto attacker : team){
@@ -99,12 +95,13 @@ namespace ariel{
 
                 if(ninja != nullptr){
 
-                    ninja->attack(victim);
+                    ninja->player_attack(victim);
                 }
 
             }
         }
     }
+    
 
     void Team::find_new_leader(){
 
@@ -149,7 +146,7 @@ namespace ariel{
     }
     
 
-    int Team::stillAlive(){
+    int Team::stillAlive() const{
         
         int count = 0;
         for(Character* player : team){

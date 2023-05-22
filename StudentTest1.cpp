@@ -10,6 +10,7 @@
 #include <random>
 #include <chrono>
 #include <iostream>
+#include "SmartTeam.hpp"
 
 using namespace ariel;
 using namespace std;
@@ -665,4 +666,31 @@ TEST_SUITE("Battle simulations") {
             CHECK(((team.stillAlive() && !team2.stillAlive()) || (!team.stillAlive() && team2.stillAlive())));
         }
     }
+
+
+    // TEST_CASE("another test for smart team") {
+    //     // Create the smart team
+    //     auto leader = create_oninja(50, 30);
+    //     SmartTeam smartTeam(leader);
+
+    //     // Create the other team
+    //     Team otherTeam(random_char());
+    //     auto player1 = create_oninja(50, 30);
+    //     auto player2 = create_yninja(20, 50);
+    //     auto player3 = create_cowboy(30, 40);
+    //     otherTeam.add(player1);
+    //     otherTeam.add(player2);
+    //     otherTeam.add(player3);
+
+    //     // Set up the smart team leader
+    //     auto leader2 = create_yninja(100, 60);
+    //     smartTeam.setLeader(leader2);
+
+    //     // Test the attack function
+    //     CHECK_NOTHROW(smartTeam.attack(&otherTeam));
+
+    //     delete leader2;
+
+    // }
+
 }

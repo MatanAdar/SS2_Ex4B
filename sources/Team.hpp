@@ -52,7 +52,7 @@ namespace ariel{
 
             Character* findVictim(Team* other_team);
 
-            int stillAlive();
+            int stillAlive() const;
             
             void print() const;
 

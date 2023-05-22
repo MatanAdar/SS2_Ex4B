@@ -65,7 +65,7 @@ namespace ariel{
     }
 
 
-    void Cowboy::attack(Character* enemy) {
+    void Cowboy::player_attack(Character* enemy) {
 
         if(enemy == nullptr || !(this->isAlive()) || !(enemy->isAlive())){
             throw std::invalid_argument("cant attack null");
