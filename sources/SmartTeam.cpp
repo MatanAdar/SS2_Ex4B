@@ -63,7 +63,7 @@ namespace ariel{
 
     Character* SmartTeam::FindBestPlayerToAttack(Team* other_team, Character* attacker) {
         if (attacker == nullptr || other_team == nullptr) {
-            throw std::runtime_error("Input parameters cannot be null.");
+            throw std::runtime_error("Attacker cannot be null.");
         }
 
         if (other_team->stillAlive() == 0) {
